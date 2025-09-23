@@ -780,13 +780,7 @@
             <div id="api-cpp" class="tab-content active">
                 <p><strong>Código C++ para verificação de keys:</strong></p>
                 <div style="background: var(--bg-dark); padding: 20px; border-radius: 10px; margin: 20px 0;">
-                    <pre style="color: var(--text-light); font-family: 'Courier New', monospace; overflow-x: auto;"><code>KeyAuth auth("https://seusite.com/api.php");
-if (auth.verifyKey("GHOST-1234-5678-9012")) {
-    cout << "✅ Acesso autorizado!" << endl;
-    // Seu código aqui
-} else {
-    cout << "❌ Acesso negado!" << endl;
-    exit(1);
+                    <pre style="color: var(--text-light); font-family: 'Courier New', monospace; overflow-x: auto;"><code>CODIGO INACESSIVEL
 }</code></pre>
                 </div>
             </div>
@@ -795,31 +789,7 @@ if (auth.verifyKey("GHOST-1234-5678-9012")) {
                 <p><strong>Código Python para verificação de keys:</strong></p>
                 <div style="background: var(--bg-dark); padding: 20px; border-radius: 10px; margin: 20px 0;">
                     <pre style="color: var(--text-light); font-family: 'Courier New', monospace; overflow-x: auto;"><code>import requests
-import json
-
-class KeyAuth:
-    def __init__(self, api_url):
-        self.api_url = api_url
-    
-    def verify_key(self, key, hwid=None):
-        data = {"action": "verify", "key": key}
-        if hwid:
-            data["hwid"] = hwid
-        
-        try:
-            response = requests.post(self.api_url, data=data)
-            result = response.json()
-            return result.get("success", False)
-        except:
-            return False
-
-# Uso
-auth = KeyAuth("https://seusite.com/api.php")
-if auth.verify_key("GHOST-1234-5678-9012"):
-    print("✅ Acesso autorizado!")
-else:
-    print("❌ Acesso negado!")
-    exit()</code></pre>
+CODIGO INACESSIVEL</code></pre>
                 </div>
             </div>
 
