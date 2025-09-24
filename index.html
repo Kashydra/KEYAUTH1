@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GhostDev KeyAuth System Pro</title>
+    <title>KeyAuth System</title>
     <style>
         * {
             margin: 0;
@@ -11,410 +11,61 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-purple: #6b46c1;
-            --secondary-purple: #8b5cf6;
-            --dark-purple: #4c1d95;
-            --light-purple: #a78bfa;
-            --bg-dark: #0f0f23;
-            --bg-secondary: #1a1a3a;
-            --text-light: #e5e7eb;
-            --text-muted: #9ca3af;
-            --success: #10b981;
-            --error: #ef4444;
-            --warning: #f59e0b;
-            --info: #3b82f6;
-        }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-secondary) 100%);
-            color: var(--text-light);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
         }
 
         .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 30px;
-            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(107, 70, 193, 0.3);
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        .nav-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .nav-btn {
-            padding: 12px 25px;
-            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
-            border: none;
-            border-radius: 25px;
-            color: white;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(107, 70, 193, 0.4);
-        }
-
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(107, 70, 193, 0.6);
-        }
-
-        .nav-btn.active {
-            background: linear-gradient(135deg, var(--secondary-purple), var(--light-purple));
-            transform: translateY(-2px);
-        }
-
-        .section {
-            display: none;
-            background: var(--bg-secondary);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(107, 70, 193, 0.2);
-        }
-
-        .section.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--light-purple);
-        }
-
-        .form-control {
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            max-width: 800px;
             width: 100%;
-            padding: 15px;
-            background: var(--bg-dark);
-            border: 2px solid var(--primary-purple);
-            border-radius: 10px;
-            color: var(--text-light);
-            font-size: 1rem;
-            transition: all 0.3s ease;
         }
 
-        .form-control:focus {
-            outline: none;
-            border-color: var(--secondary-purple);
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
-        }
-
-        .btn {
-            padding: 15px 30px;
-            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
-            border: none;
-            border-radius: 10px;
+        h1 {
             color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(107, 70, 193, 0.4);
-        }
-
-        .btn-small {
-            padding: 8px 16px;
-            font-size: 0.8rem;
-            width: auto;
-            margin: 2px;
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, var(--error), #dc2626);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, var(--success), #059669);
-        }
-
-        .btn-warning {
-            background: linear-gradient(135deg, var(--warning), #d97706);
-        }
-
-        .btn-info {
-            background: linear-gradient(135deg, var(--info), #1d4ed8);
-        }
-
-        .alert {
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        .alert-success {
-            background: rgba(16, 185, 129, 0.2);
-            border: 2px solid var(--success);
-            color: var(--success);
-        }
-
-        .alert-error {
-            background: rgba(239, 68, 68, 0.2);
-            border: 2px solid var(--error);
-            color: var(--error);
-        }
-
-        .alert-warning {
-            background: rgba(245, 158, 11, 0.2);
-            border: 2px solid var(--warning);
-            color: var(--warning);
-        }
-
-        .alert-info {
-            background: rgba(59, 130, 246, 0.2);
-            border: 2px solid var(--info);
-            color: var(--info);
-        }
-
-        .key-item {
-            background: var(--bg-dark);
-            border: 1px solid var(--primary-purple);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .key-item:hover {
-            border-color: var(--secondary-purple);
-            box-shadow: 0 5px 15px rgba(107, 70, 193, 0.2);
-        }
-
-        .key-item.disabled {
-            opacity: 0.6;
-            border-color: var(--error);
-        }
-
-        .key-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .key-code {
-            font-family: 'Courier New', monospace;
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: var(--light-purple);
-        }
-
-        .key-name {
-            font-size: 1rem;
-            color: var(--text-light);
-            margin: 5px 0;
-            font-style: italic;
-        }
-
-        .key-details {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 15px;
-        }
-
-        .key-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .key-status {
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .status-valid {
-            background: rgba(16, 185, 129, 0.2);
-            color: var(--success);
-        }
-
-        .status-expired {
-            background: rgba(239, 68, 68, 0.2);
-            color: var(--error);
-        }
-
-        .status-unused {
-            background: rgba(245, 158, 11, 0.2);
-            color: var(--warning);
-        }
-
-        .status-disabled {
-            background: rgba(75, 85, 99, 0.2);
-            color: var(--text-muted);
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .grid, .grid-3 {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .key-actions {
-                justify-content: center;
-            }
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
-            padding: 20px;
-            border-radius: 15px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(107, 70, 193, 0.3);
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .password-modal, .edit-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-        }
-
-        .password-modal.active, .edit-modal.active {
+        .tab-container {
             display: flex;
             justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: var(--bg-secondary);
-            padding: 40px;
-            border-radius: 20px;
-            border: 2px solid var(--primary-purple);
-            max-width: 500px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .copy-btn {
-            background: var(--secondary-purple);
-            border: none;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-left: 10px;
-            font-size: 0.8rem;
-        }
-
-        .search-filter {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .search-filter input, .search-filter select {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .tabs {
-            display: flex;
-            margin-bottom: 20px;
-            background: var(--bg-dark);
-            border-radius: 10px;
-            padding: 5px;
+            margin-bottom: 30px;
         }
 
         .tab {
-            flex: 1;
-            padding: 10px 20px;
-            background: transparent;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 24px;
+            margin: 0 5px;
             border: none;
-            color: var(--text-muted);
+            border-radius: 25px;
             cursor: pointer;
-            border-radius: 8px;
             transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .tab:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
         }
 
         .tab.active {
-            background: var(--primary-purple);
-            color: white;
+            background: linear-gradient(45deg, #8B5CF6, #A78BFA);
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
         }
 
         .tab-content {
@@ -424,936 +75,593 @@
         .tab-content.active {
             display: block;
         }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: white;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+            transform: scale(1.02);
+        }
+
+        button {
+            background: linear-gradient(45deg, #8B5CF6, #A78BFA);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+        }
+
+        .key-list {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .key-item {
+            background: rgba(255, 255, 255, 0.2);
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #8B5CF6;
+        }
+
+        .key-item h4 {
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .key-item p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .status.active {
+            background: #10B981;
+            color: white;
+        }
+
+        .status.inactive {
+            background: #EF4444;
+            color: white;
+        }
+
+        .status.expired {
+            background: #F59E0B;
+            color: white;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+
+        .alert.success {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10B981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .alert.error {
+            background: rgba(239, 68, 68, 0.2);
+            color: #EF4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .api-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .api-endpoint {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+            color: #A78BFA;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+
+        .password-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        }
+
+        .github-status {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .github-connected {
+            color: #10B981;
+        }
+
+        .github-error {
+            color: #EF4444;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .loading {
+            animation: pulse 1.5s infinite;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>👻 GhostDev KeyAuth Pro</h1>
-            <p>Sistema Avançado de Gerenciamento de Licenças</p>
+        <h1>🔐 KeyAuth System</h1>
+        
+        <div class="github-status" id="githubStatus">
+            <span class="loading">Verificando conexão com GitHub...</span>
         </div>
 
-        <div class="nav-buttons">
-            <button class="nav-btn active" onclick="showSection('verify')">🔍 Verificar Key</button>
-            <button class="nav-btn" onclick="requestAccess('create')">🔑 Criar Keys</button>
-            <button class="nav-btn" onclick="requestAccess('manage')">📋 Gerenciar</button>
-            <button class="nav-btn" onclick="requestAccess('export')">📤 Exportar</button>
-            <button class="nav-btn" onclick="showSection('api')">🔌 API</button>
+        <div class="tab-container">
+            <button class="tab active" onclick="switchTab('activate')">Ativar Chave</button>
+            <button class="tab" onclick="switchTab('manage')">Gerenciar</button>
+            <button class="tab" onclick="switchTab('api')">API</button>
         </div>
 
-        <!-- Seção de Verificação -->
-        <div id="verify" class="section active">
-            <h2>🔍 Verificar Key de Licença</h2>
+        <!-- Ativar Chave -->
+        <div id="activate" class="tab-content active">
             <div class="form-group">
-                <label>Digite sua Key:</label>
-                <input type="text" class="form-control" id="keyToVerify" placeholder="GHOST-XXXX-XXXX-XXXX" style="text-transform: uppercase;">
+                <label>Chave de Licença:</label>
+                <input type="text" id="activateKey" placeholder="Digite sua chave aqui..." />
             </div>
-            <button class="btn" onclick="verifyKey()">Verificar Key</button>
-            <div id="verifyResult"></div>
+            <button onclick="activateKey()">🚀 Ativar Chave</button>
+            <div id="activateResult"></div>
         </div>
 
-        <!-- Criar Keys -->
-        <div id="create" class="section">
-            <h2>🔑 Criar Novas Keys</h2>
+        <!-- Gerenciar Chaves -->
+        <div id="manage" class="tab-content">
+            <div class="form-group">
+                <label>Senha de Administrador:</label>
+                <input type="password" id="adminPassword" placeholder="Digite a senha..." />
+            </div>
+            <button onclick="authenticate()">🔓 Entrar</button>
             
-            <div class="tabs">
-                <button class="tab active" onclick="showTab('create', 'single')">Criar Individual</button>
-                <button class="tab" onclick="showTab('create', 'bulk')">Criar em Massa</button>
-                <button class="tab" onclick="showTab('create', 'custom')">Personalizada</button>
-            </div>
-
-            <div id="create-single" class="tab-content active">
-                <div class="grid">
-                    <div class="form-group">
-                        <label>Tipo de Licença:</label>
-                        <select class="form-control" id="keyType">
-                            <option value="trial">Trial (3 dias)</option>
-                            <option value="daily">Diária (1 dia)</option>
-                            <option value="weekly">Semanal (7 dias)</option>
-                            <option value="monthly">Mensal (30 dias)</option>
-                            <option value="quarterly">Trimestral (90 dias)</option>
-                            <option value="yearly">Anual (365 dias)</option>
-                            <option value="lifetime">Vitalícia</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Nome/Observação:</label>
-                        <input type="text" class="form-control" id="keyName" placeholder="Cliente João, Promo Black Friday...">
-                    </div>
-                </div>
-                <button class="btn" onclick="createSingleKey()">Gerar Key</button>
-            </div>
-
-            <div id="create-bulk" class="tab-content">
-                <div class="grid">
-                    <div class="form-group">
-                        <label>Tipo de Licença:</label>
-                        <select class="form-control" id="bulkKeyType">
-                            <option value="trial">Trial (3 dias)</option>
-                            <option value="daily">Diária (1 dia)</option>
-                            <option value="weekly">Semanal (7 dias)</option>
-                            <option value="monthly">Mensal (30 dias)</option>
-                            <option value="quarterly">Trimestral (90 dias)</option>
-                            <option value="yearly">Anual (365 dias)</option>
-                            <option value="lifetime">Vitalícia</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Quantidade:</label>
-                        <input type="number" class="form-control" id="keyQuantity" value="10" min="1" max="1000">
-                    </div>
-                </div>
+            <div id="adminPanel" style="display: none;">
+                <h3 style="color: white; margin: 20px 0;">Criar Nova Chave</h3>
                 <div class="form-group">
-                    <label>Prefixo para Nomes:</label>
-                    <input type="text" class="form-control" id="bulkKeyPrefix" placeholder="Lote Black Friday">
+                    <label>Duração (dias):</label>
+                    <input type="number" id="keyDuration" value="30" min="1" max="365" />
                 </div>
-                <button class="btn" onclick="createBulkKeys()">Gerar Keys em Massa</button>
-            </div>
-
-            <div id="create-custom" class="tab-content">
-                <div class="grid">
-                    <div class="form-group">
-                        <label>Duração Personalizada (dias):</label>
-                        <input type="number" class="form-control" id="customDays" value="30" min="1" max="36500">
-                    </div>
-                    <div class="form-group">
-                        <label>Prefixo da Key:</label>
-                        <input type="text" class="form-control" id="customPrefix" value="GHOST" maxlength="10" style="text-transform: uppercase;">
-                    </div>
+                <button onclick="createKey()">➕ Criar Chave</button>
+                
+                <div class="key-list" id="keysList">
+                    <h3 style="color: white; margin-bottom: 15px;">Chaves Registradas</h3>
+                    <div id="keysContainer">Carregando chaves...</div>
                 </div>
-                <div class="form-group">
-                    <label>Nome/Observação:</label>
-                    <input type="text" class="form-control" id="customKeyName" placeholder="Key personalizada...">
-                </div>
-                <button class="btn" onclick="createCustomKey()">Gerar Key Personalizada</button>
-            </div>
-
-            <div id="createResult"></div>
-        </div>
-
-        <!-- Gerenciar Keys -->
-        <div id="manage" class="section">
-            <h2>📋 Gerenciar Keys</h2>
-
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="stat-number" id="totalKeys">0</div>
-                    <div class="stat-label">Total de Keys</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="activeKeys">0</div>
-                    <div class="stat-label">Keys Ativas</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="expiredKeys">0</div>
-                    <div class="stat-label">Keys Expiradas</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="unusedKeys">0</div>
-                    <div class="stat-label">Keys Não Usadas</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="disabledKeys">0</div>
-                    <div class="stat-label">Keys Desativadas</div>
-                </div>
-            </div>
-
-            <div class="search-filter">
-                <input type="text" class="form-control" id="searchKey" placeholder="🔍 Buscar por key ou nome...">
-                <select class="form-control" id="filterStatus">
-                    <option value="">Todos os Status</option>
-                    <option value="unused">Não Utilizadas</option>
-                    <option value="active">Ativas</option>
-                    <option value="expired">Expiradas</option>
-                    <option value="disabled">Desativadas</option>
-                </select>
-                <select class="form-control" id="filterType">
-                    <option value="">Todos os Tipos</option>
-                    <option value="trial">Trial</option>
-                    <option value="daily">Diária</option>
-                    <option value="weekly">Semanal</option>
-                    <option value="monthly">Mensal</option>
-                    <option value="quarterly">Trimestral</option>
-                    <option value="yearly">Anual</option>
-                    <option value="lifetime">Vitalícia</option>
-                </select>
-                <button class="btn btn-info" onclick="applyFilters()">Filtrar</button>
-            </div>
-
-            <div style="margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
-                <button class="btn btn-danger btn-small" onclick="clearExpiredKeys()">🗑️ Limpar Expiradas</button>
-                <button class="btn btn-info btn-small" onclick="refreshKeysList()">🔄 Atualizar</button>
-            </div>
-
-            <div id="keysList"></div>
-        </div>
-
-        <!-- Exportar -->
-        <div id="export" class="section">
-            <h2>📤 Exportar Dados</h2>
-            
-            <div style="background: var(--bg-dark); padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-                <h3>Exportação Completa</h3>
-                <div class="grid">
-                    <button class="btn btn-info" onclick="exportAllKeys('json')">📄 Exportar JSON</button>
-                    <button class="btn btn-success" onclick="exportAllKeys('csv')">📊 Exportar CSV</button>
-                </div>
-            </div>
-
-            <div style="background: var(--bg-dark); padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-                <h3>Exportação Filtrada</h3>
-                <div class="form-group">
-                    <label>Filtrar por Status:</label>
-                    <select class="form-control" id="exportStatus">
-                        <option value="">Todos</option>
-                        <option value="active">Apenas Ativas</option>
-                        <option value="expired">Apenas Expiradas</option>
-                        <option value="unused">Apenas Não Usadas</option>
-                    </select>
-                </div>
-                <div class="grid">
-                    <button class="btn btn-info" onclick="exportFilteredKeys('json')">📄 Exportar Filtrado (JSON)</button>
-                    <button class="btn btn-success" onclick="exportFilteredKeys('csv')">📊 Exportar Filtrado (CSV)</button>
-                </div>
-            </div>
-
-            <div style="background: var(--bg-dark); padding: 20px; border-radius: 15px;">
-                <h3>Backup Completo</h3>
-                <p>Inclui todas as keys e configurações</p>
-                <button class="btn btn-warning" onclick="createBackup()">💾 Criar Backup</button>
             </div>
         </div>
 
-        <!-- API -->
-        <div id="api" class="section">
-            <h2>🔌 Integração da API</h2>
-            
-            <div style="background: var(--bg-dark); padding: 20px; border-radius: 10px; margin: 20px 0;">
-                <h3>Exemplo C++:</h3>
-                <pre style="color: var(--text-light); font-family: 'Courier New', monospace; overflow-x: auto;"><code>INACESSIVEL
-}</code></pre>
-            </div>
+        <!-- API Info -->
+        <div id="api" class="tab-content">
+            <div class="api-section">
+                <h3 style="color: white; margin-bottom: 20px;">🔌 Endpoints da API</h3>
+                
+                <h4 style="color: white; margin: 15px 0;">Ativar Chave</h4>
+                <div class="api-endpoint">POST /api/activate</div>
+                <p style="color: rgba(255,255,255,0.8); margin: 10px 0;">Body: {"key": "sua_chave_aqui"}</p>
+                
+                <h4 style="color: white; margin: 15px 0;">Verificar Chave</h4>
+                <div class="api-endpoint">GET /api/verify?key=sua_chave_aqui</div>
+                
+                <h4 style="color: white; margin: 15px 0;">Exemplo C++</h4>
+                <div class="api-endpoint">
+// XOR Decryption function
+string xorDecrypt(string encrypted, int key) {
+    string result = "";
+    for (char c : encrypted) {
+        result += char(c ^ key);
+    }
+    return result;
+}
 
-            <div style="background: var(--bg-dark); padding: 20px; border-radius: 10px; margin: 20px 0;">
-                <h3>Exemplo Python:</h3>
-                <pre style="color: var(--text-light); font-family: 'Courier New', monospace; overflow-x: auto;"><code> INACESSIVEL </code></pre>
-            </div>
-
-            <div class="alert alert-info">
-                <strong>📋 Endpoints da API:</strong><br>
-                • <code>SEM AUTORIZAÇÃO</code> - Verificar key<br>
-                • <code>SEM AUTORIZAÇÃO</code> - Criar keys (requer senha admin)<br>
-                • <code>SEM AUTORIZAÇÃO</code> - Listar keys (requer senha admin)<br>
-                • <code>SEM AUTORIZAÇÃO</code> - Editar key (requer senha admin)<br>
-                • <code>SEM AUTORIZAÇÃO</code> - Desativar key (requer senha admin)<br>
-                • <code>SEM AUTORIZAÇÃO</code> - Estatísticas
+// Usage
+string encryptedKey = "encrypted_key_from_api";
+string decryptedKey = xorDecrypt(encryptedKey, 0x48953);
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal de Senha -->
+    <!-- Password Modal -->
     <div id="passwordModal" class="password-modal">
         <div class="modal-content">
-            <h3 style="margin-bottom: 20px; text-align: center;">🔒 Acesso de Administrador</h3>
+            <h3 style="color: white; margin-bottom: 20px;">🔐 Acesso Restrito</h3>
             <div class="form-group">
-                <label>Digite a senha de administrador:</label>
-                <input type="password" class="form-control" id="adminPassword" placeholder="Digite a senha...">
+                <input type="password" id="modalPassword" placeholder="Digite a senha de admin..." />
             </div>
-            <button class="btn" onclick="checkPassword()">Verificar</button>
-            <button class="btn btn-danger" onclick="closePasswordModal()">Cancelar</button>
-            <div id="passwordError"></div>
-        </div>
-    </div>
-
-    <!-- Modal de Edição -->
-    <div id="editModal" class="edit-modal">
-        <div class="modal-content">
-            <h3 style="margin-bottom: 20px; text-align: center;">✏️ Editar Key</h3>
-            <div class="form-group">
-                <label>Código da Key:</label>
-                <input type="text" class="form-control" id="editKeyCode" readonly>
-            </div>
-            <div class="form-group">
-                <label>Nome/Observação:</label>
-                <input type="text" class="form-control" id="editKeyName" placeholder="Digite um nome ou observação...">
-            </div>
-            <div class="form-group">
-                <label>Status:</label>
-                <select class="form-control" id="editKeyStatus">
-                    <option value="active">Ativada</option>
-                    <option value="disabled">Desativada</option>
-                </select>
-            </div>
-            <button class="btn btn-success" onclick="saveKeyEdit()">💾 Salvar</button>
-            <button class="btn btn-danger" onclick="closeEditModal()">Cancelar</button>
+            <button onclick="checkPassword()">Entrar</button>
+            <button onclick="closeModal()">Cancelar</button>
         </div>
     </div>
 
     <script>
-        // Configurações
-        const ADMIN_PASSWORD = "GHOSTDEVOWNER_2025/2000_LOL";
-        let currentAction = '';
-        let editingKey = null;
-        
-        // Simulação de banco de dados
-        function getKeys() {
-            const keys = localStorage.getItem('keyauth_keys_pro');
-            return keys ? JSON.parse(keys) : [];
+        const GITHUB_TOKEN = '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';
+        const REPO_OWNER = 'seu_usuario_github'; // ALTERE AQUI
+        const REPO_NAME = 'seu_repositorio'; // ALTERE AQUI
+        const FILE_PATH = 'soijoi4j3iou45lkfjvosdaio4jm5io3ljmgiofjsdfdfjl4k3mgfdjgjeio3iojgfdk.json';
+        const ADMIN_PASSWORD = 'GHOSTDEVOWNER_2025/2000_LOL';
+        const XOR_KEY = 0x48953;
+
+        let isAuthenticated = false;
+        let currentKeys = {};
+        let fileSha = '';
+
+        // XOR Encryption/Decryption
+        function xorCrypt(text, key) {
+            let result = '';
+            for (let i = 0; i < text.length; i++) {
+                result += String.fromCharCode(text.charCodeAt(i) ^ (key & 0xFF));
+            }
+            return result;
         }
-        
-        function saveKeys(keys) {
-            localStorage.setItem('keyauth_keys_pro', JSON.stringify(keys));
-        }
-        
-        // Gerar código de key
-        function generateKeyCode(prefix = 'GHOST') {
+
+        function generateKey() {
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            let result = prefix.toUpperCase() + '-';
-            for (let i = 0; i < 4; i++) {
-                if (i > 0) result += '-';
-                for (let j = 0; j < 4; j++) {
-                    result += chars.charAt(Math.floor(Math.random() * chars.length));
+            let result = '';
+            for (let i = 0; i < 20; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        async function checkGithubConnection() {
+            try {
+                const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
+                    headers: {
+                        'Authorization': `token ${GITHUB_TOKEN}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+
+                const status = document.getElementById('githubStatus');
+                if (response.ok) {
+                    status.innerHTML = '<span class="github-connected">✅ Conectado ao GitHub</span>';
+                    const data = await response.json();
+                    fileSha = data.sha;
+                    
+                    // Decodificar e descriptografar dados
+                    const encryptedData = atob(data.content);
+                    const decryptedData = xorCrypt(encryptedData, XOR_KEY);
+                    currentKeys = JSON.parse(decryptedData);
+                } else if (response.status === 404) {
+                    status.innerHTML = '<span class="github-error">⚠️ Arquivo não encontrado - será criado automaticamente</span>';
+                    currentKeys = { keys: [] };
+                } else {
+                    status.innerHTML = '<span class="github-error">❌ Erro na conexão com GitHub</span>';
                 }
-            }
-            return result;
-        }
-        
-        // Funções de data
-        function addDays(date, days) {
-            const result = new Date(date);
-            result.setDate(result.getDate() + days);
-            return result;
-        }
-        
-        function formatDate(date) {
-            return date.toLocaleDateString('pt-BR') + ' ' + date.toLocaleTimeString('pt-BR');
-        }
-        
-        function getDurationDays(type) {
-            const durations = {
-                trial: 3,
-                daily: 1,
-                weekly: 7,
-                monthly: 30,
-                quarterly: 90,
-                yearly: 365,
-                lifetime: 36500
-            };
-            return durations[type] || 30;
-        }
-        
-        // Navegação
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            
-            document.getElementById(sectionId).classList.add('active');
-            event.target.classList.add('active');
-            
-            if (sectionId === 'manage') {
-                loadKeysList();
+            } catch (error) {
+                document.getElementById('githubStatus').innerHTML = '<span class="github-error">❌ Erro na conexão com GitHub</span>';
+                console.error('GitHub Error:', error);
             }
         }
-        
-        function showTab(sectionId, tabId) {
-            document.querySelectorAll(`#${sectionId} .tab`).forEach(t => t.classList.remove('active'));
-            document.querySelectorAll(`#${sectionId} .tab-content`).forEach(t => t.classList.remove('active'));
-            
-            event.target.classList.add('active');
-            document.getElementById(`${sectionId}-${tabId}`).classList.add('active');
+
+        async function saveToGithub(data) {
+            try {
+                const encryptedData = xorCrypt(JSON.stringify(data), XOR_KEY);
+                const encodedContent = btoa(encryptedData);
+
+                const body = {
+                    message: `Update keys - ${new Date().toISOString()}`,
+                    content: encodedContent,
+                };
+
+                if (fileSha) {
+                    body.sha = fileSha;
+                }
+
+                const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${GITHUB_TOKEN}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    fileSha = result.content.sha;
+                    return true;
+                }
+                return false;
+            } catch (error) {
+                console.error('Save Error:', error);
+                return false;
+            }
         }
-        
-        // Sistema de senha
-        function requestAccess(action) {
-            currentAction = action;
-            document.getElementById('passwordModal').classList.add('active');
-            document.getElementById('adminPassword').value = '';
-            document.getElementById('passwordError').innerHTML = '';
-        }
-        
-        function checkPassword() {
+
+        function authenticate() {
             const password = document.getElementById('adminPassword').value;
             if (password === ADMIN_PASSWORD) {
-                closePasswordModal();
-                showSection(currentAction);
-                document.querySelector(`button[onclick*="'${currentAction}'"]`).classList.add('active');
+                isAuthenticated = true;
+                document.getElementById('adminPanel').style.display = 'block';
+                loadKeys();
+                showAlert('success', '✅ Autenticado com sucesso!');
             } else {
-                document.getElementById('passwordError').innerHTML = '<div class="alert alert-error">❌ Senha incorreta!</div>';
+                showAlert('error', '❌ Senha incorreta!');
             }
         }
-        
-        function closePasswordModal() {
-            document.getElementById('passwordModal').classList.remove('active');
-        }
-        
-        // Verificação de key
-        function verifyKey() {
-            const keyCode = document.getElementById('keyToVerify').value.trim().toUpperCase();
-            const resultDiv = document.getElementById('verifyResult');
-            
-            if (!keyCode) {
-                resultDiv.innerHTML = '<div class="alert alert-error">❌ Por favor, digite uma key!</div>';
+
+        async function createKey() {
+            if (!isAuthenticated) {
+                showAlert('error', '❌ Acesso negado!');
                 return;
             }
-            
-            const keys = getKeys();
-            const key = keys.find(k => k.code === keyCode);
-            
-            if (!key) {
-                resultDiv.innerHTML = '<div class="alert alert-error">❌ Key não encontrada no sistema!</div>';
-                return;
-            }
-            
-            if (key.disabled) {
-                resultDiv.innerHTML = '<div class="alert alert-error">❌ Esta key foi desativada pelo administrador!</div>';
-                return;
-            }
-            
+
+            const duration = parseInt(document.getElementById('keyDuration').value);
+            const newKey = generateKey();
             const now = new Date();
             
-            if (key.usedAt) {
-                const expiresAt = new Date(key.expiresAt);
-                
-                if (now > expiresAt) {
-                    resultDiv.innerHTML = `<div class="alert alert-error">❌ Key expirada!<br>
-                    Expirou em: ${formatDate(expiresAt)}</div>`;
-                    return;
-                }
-                
-                resultDiv.innerHTML = `<div class="alert alert-success">✅ Key válida e ativa!<br>
-                <strong>Tipo:</strong> ${key.type}<br>
-                <strong>Nome:</strong> ${key.name || 'Sem nome'}<br>
-                <strong>Primeira utilização:</strong> ${formatDate(new Date(key.usedAt))}<br>
-                <strong>Expira em:</strong> ${formatDate(expiresAt)}</div>`;
+            const keyData = {
+                key: newKey,
+                created: now.toISOString(),
+                duration: duration,
+                activated: false,
+                activatedAt: null,
+                expiresAt: null,
+                status: 'created'
+            };
+
+            currentKeys.keys = currentKeys.keys || [];
+            currentKeys.keys.push(keyData);
+
+            if (await saveToGithub(currentKeys)) {
+                showAlert('success', `✅ Chave criada: ${newKey}`);
+                loadKeys();
             } else {
-                // Primeira utilização da key
-                key.usedAt = now.toISOString();
-                key.expiresAt = key.customDays ? 
-                    addDays(now, key.customDays).toISOString() : 
-                    addDays(now, getDurationDays(key.type)).toISOString();
-                saveKeys(keys);
-                
-                resultDiv.innerHTML = `<div class="alert alert-success">✅ Key ativada com sucesso!<br>
-                <strong>Tipo:</strong> ${key.type}<br>
-                <strong>Nome:</strong> ${key.name || 'Sem nome'}<br>
-                <strong>Ativada em:</strong> ${formatDate(now)}<br>
-                <strong>Expira em:</strong> ${formatDate(new Date(key.expiresAt))}</div>`;
+                showAlert('error', '❌ Erro ao salvar chave!');
             }
         }
-        
-        // Criar keys
-        function createSingleKey() {
-            const type = document.getElementById('keyType').value;
-            const name = document.getElementById('keyName').value.trim();
-            
-            const keys = getKeys();
-            const keyCode = generateKeyCode();
-            const now = new Date();
-            
-            const newKey = {
-                code: keyCode,
-                type: type,
-                name: name || '',
-                createdAt: now.toISOString(),
-                usedAt: null,
-                expiresAt: null,
-                disabled: false
-            };
-            
-            keys.push(newKey);
-            saveKeys(keys);
-            
-            document.getElementById('createResult').innerHTML = `
-                <div class="alert alert-success">✅ Key criada com sucesso!</div>
-                <div style="background: var(--bg-dark); padding: 20px; border-radius: 10px; margin-top: 20px;">
-                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                        <span style="font-family: monospace; font-size: 1.1rem; color: var(--light-purple);">${keyCode}</span>
-                        <button class="copy-btn" onclick="copyToClipboard('${keyCode}')">📋 Copiar</button>
-                    </div>
-                    <div style="color: var(--text-muted);">
-                        Tipo: ${type} | Nome: ${name || 'Sem nome'}
-                    </div>
-                </div>
-            `;
-            
-            document.getElementById('keyName').value = '';
-        }
-        
-        function createBulkKeys() {
-            const type = document.getElementById('bulkKeyType').value;
-            const quantity = parseInt(document.getElementById('keyQuantity').value);
-            const prefix = document.getElementById('bulkKeyPrefix').value.trim();
-            
-            if (quantity < 1 || quantity > 1000) {
-                document.getElementById('createResult').innerHTML = '<div class="alert alert-error">❌ Quantidade deve ser entre 1 e 1000!</div>';
+
+        async function activateKey() {
+            const keyToActivate = document.getElementById('activateKey').value.trim();
+            if (!keyToActivate) {
+                showAlert('error', '❌ Digite uma chave válida!', 'activateResult');
                 return;
             }
-            
-            const keys = getKeys();
-            const newKeys = [];
-            const now = new Date();
-            
-            for (let i = 0; i < quantity; i++) {
-                const keyCode = generateKeyCode();
-                const newKey = {
-                    code: keyCode,
-                    type: type,
-                    name: prefix ? `${prefix} #${i + 1}` : '',
-                    createdAt: now.toISOString(),
-                    usedAt: null,
-                    expiresAt: null,
-                    disabled: false
-                };
-                keys.push(newKey);
-                newKeys.push(keyCode);
-            }
-            
-            saveKeys(keys);
-            
-            let resultHtml = `<div class="alert alert-success">✅ ${quantity} key(s) criada(s) com sucesso!</div>`;
-            resultHtml += '<div style="background: var(--bg-dark); padding: 20px; border-radius: 10px; margin-top: 20px; max-height: 300px; overflow-y: auto;">';
-            
-            newKeys.forEach((key, index) => {
-                resultHtml += `<div style="margin-bottom: 10px; display: flex; align-items: center;">
-                    <span style="font-family: monospace; font-size: 1rem; color: var(--light-purple);">${key}</span>
-                    <button class="copy-btn" onclick="copyToClipboard('${key}')">📋</button>
-                </div>`;
-            });
-            
-            resultHtml += '</div>';
-            document.getElementById('createResult').innerHTML = resultHtml;
-        }
-        
-        function createCustomKey() {
-            const customDays = parseInt(document.getElementById('customDays').value);
-            const customPrefix = document.getElementById('customPrefix').value.trim().toUpperCase() || 'GHOST';
-            const name = document.getElementById('customKeyName').value.trim();
-            
-            if (customDays < 1 || customDays > 36500) {
-                document.getElementById('createResult').innerHTML = '<div class="alert alert-error">❌ Duração deve ser entre 1 e 36500 dias!</div>';
+
+            const keyIndex = currentKeys.keys.findIndex(k => k.key === keyToActivate);
+            if (keyIndex === -1) {
+                showAlert('error', '❌ Chave não encontrada!', 'activateResult');
                 return;
             }
-            
-            const keys = getKeys();
-            const keyCode = generateKeyCode(customPrefix);
-            const now = new Date();
-            
-            const newKey = {
-                code: keyCode,
-                type: `custom_${customDays}d`,
-                name: name || '',
-                createdAt: now.toISOString(),
-                usedAt: null,
-                expiresAt: null,
-                disabled: false,
-                customDays: customDays
-            };
-            
-            keys.push(newKey);
-            saveKeys(keys);
-            
-            document.getElementById('createResult').innerHTML = `
-                <div class="alert alert-success">✅ Key personalizada criada com sucesso!</div>
-                <div style="background: var(--bg-dark); padding: 20px; border-radius: 10px; margin-top: 20px;">
-                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                        <span style="font-family: monospace; font-size: 1.1rem; color: var(--light-purple);">${keyCode}</span>
-                        <button class="copy-btn" onclick="copyToClipboard('${keyCode}')">📋 Copiar</button>
-                    </div>
-                    <div style="color: var(--text-muted);">
-                        Duração: ${customDays} dias | Nome: ${name || 'Sem nome'}
-                    </div>
-                </div>
-            `;
-            
-            document.getElementById('customKeyName').value = '';
-            document.getElementById('customDays').value = '30';
-            document.getElementById('customPrefix').value = 'GHOST';
-        }
-        
-        // Funções de utilidade
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                showNotification('✅ Copiado!', 'success');
-            });
-        }
-        
-        function showNotification(message, type) {
-            const notification = document.createElement('div');
-            notification.textContent = message;
-            notification.className = `alert alert-${type}`;
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                z-index: 9999;
-                min-width: 200px;
-                animation: slideIn 0.3s ease;
-            `;
-            document.body.appendChild(notification);
-            setTimeout(() => notification.remove(), 3000);
-        }
-        
-        // Gerenciamento de keys
-        function loadKeysList() {
-            const keys = getKeys();
-            updateStats(keys);
-            displayKeysList(keys);
-        }
-        
-        function updateStats(keys) {
-            const stats = {
-                total: keys.length,
-                active: 0,
-                expired: 0,
-                unused: 0,
-                disabled: 0
-            };
-            
-            const now = new Date();
-            
-            keys.forEach(key => {
-                if (key.disabled) {
-                    stats.disabled++;
-                } else if (!key.usedAt) {
-                    stats.unused++;
+
+            const key = currentKeys.keys[keyIndex];
+            if (key.activated) {
+                if (key.status === 'expired') {
+                    showAlert('error', '❌ Chave expirada!', 'activateResult');
                 } else {
-                    const expiresAt = new Date(key.expiresAt);
-                    if (now > expiresAt) {
-                        stats.expired++;
-                    } else {
-                        stats.active++;
-                    }
+                    const remainingTime = new Date(key.expiresAt) - new Date();
+                    const remainingDays = Math.ceil(remainingTime / (1000 * 60 * 60 * 24));
+                    showAlert('success', `✅ Chave já ativada! Restam ${remainingDays} dias.`, 'activateResult');
                 }
-            });
-            
-            document.getElementById('totalKeys').textContent = stats.total;
-            document.getElementById('activeKeys').textContent = stats.active;
-            document.getElementById('expiredKeys').textContent = stats.expired;
-            document.getElementById('unusedKeys').textContent = stats.unused;
-            document.getElementById('disabledKeys').textContent = stats.disabled;
-        }
-        
-        function displayKeysList(keys) {
-            const keysListDiv = document.getElementById('keysList');
-            
-            if (keys.length === 0) {
-                keysListDiv.innerHTML = '<div class="alert alert-warning">📭 Nenhuma key encontrada. Crie algumas keys primeiro!</div>';
                 return;
             }
-            
-            let html = '';
+
+            // Ativar chave
             const now = new Date();
+            const expirationDate = new Date(now.getTime() + (key.duration * 24 * 60 * 60 * 1000));
             
-            keys.forEach(key => {
-                let status = 'unused';
-                let statusText = 'Não utilizada';
-                let statusClass = 'status-unused';
-                
-                if (key.disabled) {
-                    status = 'disabled';
-                    statusText = 'Desativada';
-                    statusClass = 'status-disabled';
-                } else if (key.usedAt) {
-                    const expiresAt = new Date(key.expiresAt);
-                    if (now > expiresAt) {
-                        status = 'expired';
-                        statusText = 'Expirada';
-                        statusClass = 'status-expired';
-                    } else {
-                        status = 'active';
-                        statusText = 'Ativa';
-                        statusClass = 'status-valid';
-                    }
-                }
-                
-                const createdAt = new Date(key.createdAt);
-                
-                html += `<div class="key-item ${key.disabled ? 'disabled' : ''}">
-                    <div class="key-header">
-                        <div>
-                            <div class="key-code">${key.code}</div>
-                            ${key.name ? `<div class="key-name">"${key.name}"</div>` : ''}
-                        </div>
-                        <div class="key-status ${statusClass}">${statusText}</div>
-                    </div>
-                    <div class="key-details">
-                        Tipo: ${key.type} | Criada em: ${formatDate(createdAt)}
-                        ${key.usedAt ? `<br>Primeira utilização: ${formatDate(new Date(key.usedAt))}` : ''}
-                        ${key.expiresAt ? `<br>Expira em: ${formatDate(new Date(key.expiresAt))}` : ''}
-                    </div>
-                    <div class="key-actions">
-                        <button class="btn btn-info btn-small" onclick="copyToClipboard('${key.code}')">📋 Copiar</button>
-                        <button class="btn btn-warning btn-small" onclick="editKey('${key.code}')">✏️ Editar</button>
-                        ${key.disabled ? 
-                            `<button class="btn btn-success btn-small" onclick="enableKey('${key.code}')">✅ Ativar</button>` :
-                            `<button class="btn btn-danger btn-small" onclick="disableKey('${key.code}')">🚫 Desativar</button>`
-                        }
-                        <button class="btn btn-danger btn-small" onclick="deleteKey('${key.code}')">🗑️ Excluir</button>
-                    </div>
-                </div>`;
-            });
-            
-            keysListDiv.innerHTML = html;
-        }
-        
-        function applyFilters() {
-            const searchTerm = document.getElementById('searchKey').value.toLowerCase();
-            const statusFilter = document.getElementById('filterStatus').value;
-            const typeFilter = document.getElementById('filterType').value;
-            
-            let keys = getKeys();
-            const now = new Date();
-            
-            keys = keys.filter(key => {
-                const matchesSearch = !searchTerm || 
-                    key.code.toLowerCase().includes(searchTerm) || 
-                    (key.name && key.name.toLowerCase().includes(searchTerm));
-                
-                let matchesStatus = true;
-                if (statusFilter) {
-                    if (statusFilter === 'disabled') {
-                        matchesStatus = key.disabled;
-                    } else if (statusFilter === 'unused') {
-                        matchesStatus = !key.disabled && !key.usedAt;
-                    } else if (statusFilter === 'active') {
-                        matchesStatus = !key.disabled && key.usedAt && new Date(key.expiresAt) > now;
-                    } else if (statusFilter === 'expired') {
-                        matchesStatus = !key.disabled && key.usedAt && new Date(key.expiresAt) <= now;
-                    }
-                }
-                
-                const matchesType = !typeFilter || key.type === typeFilter;
-                
-                return matchesSearch && matchesStatus && matchesType;
-            });
-            
-            displayKeysList(keys);
-        }
-        
-        function refreshKeysList() {
-            document.getElementById('searchKey').value = '';
-            document.getElementById('filterStatus').value = '';
-            document.getElementById('filterType').value = '';
-            loadKeysList();
-        }
-        
-        // Editar key
-        function editKey(keyCode) {
-            const keys = getKeys();
-            const key = keys.find(k => k.code === keyCode);
-            
-            if (!key) return;
-            
-            editingKey = keyCode;
-            document.getElementById('editKeyCode').value = key.code;
-            document.getElementById('editKeyName').value = key.name || '';
-            document.getElementById('editKeyStatus').value = key.disabled ? 'disabled' : 'active';
-            document.getElementById('editModal').classList.add('active');
-        }
-        
-        function saveKeyEdit() {
-            if (!editingKey) return;
-            
-            const keys = getKeys();
-            const keyIndex = keys.findIndex(k => k.code === editingKey);
-            
-            if (keyIndex === -1) return;
-            
-            keys[keyIndex].name = document.getElementById('editKeyName').value.trim();
-            keys[keyIndex].disabled = document.getElementById('editKeyStatus').value === 'disabled';
-            
-            saveKeys(keys);
-            closeEditModal();
-            loadKeysList();
-            showNotification('✅ Key editada com sucesso!', 'success');
-        }
-        
-        function closeEditModal() {
-            document.getElementById('editModal').classList.remove('active');
-            editingKey = null;
-        }
-        
-        function disableKey(keyCode) {
-            if (!confirm('Tem certeza que deseja desativar esta key?')) return;
-            
-            const keys = getKeys();
-            const key = keys.find(k => k.code === keyCode);
-            if (key) {
-                key.disabled = true;
-                saveKeys(keys);
-                loadKeysList();
-                showNotification('Key desativada!', 'warning');
-            }
-        }
-        
-        function enableKey(keyCode) {
-            const keys = getKeys();
-            const key = keys.find(k => k.code === keyCode);
-            if (key) {
-                key.disabled = false;
-                saveKeys(keys);
-                loadKeysList();
-                showNotification('Key ativada!', 'success');
-            }
-        }
-        
-        function deleteKey(keyCode) {
-            if (!confirm('Tem certeza que deseja excluir esta key? Esta ação não pode ser desfeita!')) return;
-            
-            const keys = getKeys();
-            const filteredKeys = keys.filter(k => k.code !== keyCode);
-            saveKeys(filteredKeys);
-            loadKeysList();
-            showNotification('Key excluída!', 'info');
-        }
-        
-        function clearExpiredKeys() {
-            if (!confirm('Tem certeza que deseja remover todas as keys expiradas?')) return;
-            
-            const keys = getKeys();
-            const now = new Date();
-            const validKeys = keys.filter(key => {
-                if (!key.usedAt || key.disabled) return true;
-                const expiresAt = new Date(key.expiresAt);
-                return now <= expiresAt;
-            });
-            
-            const removedCount = keys.length - validKeys.length;
-            saveKeys(validKeys);
-            loadKeysList();
-            showNotification(`${removedCount} keys expiradas removidas!`, 'info');
-        }
-        
-        // Exportar dados
-        function exportAllKeys(format) {
-            const keys = getKeys();
-            exportKeys(format, keys);
-        }
-        
-        function exportFilteredKeys(format) {
-            const statusFilter = document.getElementById('exportStatus').value;
-            
-            let keys = getKeys();
-            const now = new Date();
-            
-            if (statusFilter) {
-                keys = keys.filter(key => {
-                    if (statusFilter === 'active') {
-                        return !key.disabled && key.usedAt && new Date(key.expiresAt) > now;
-                    } else if (statusFilter === 'expired') {
-                        return !key.disabled && key.usedAt && new Date(key.expiresAt) <= now;
-                    } else if (statusFilter === 'unused') {
-                        return !key.disabled && !key.usedAt;
-                    }
-                    return true;
-                });
-            }
-            
-            if (keys.length === 0) {
-                showNotification('Nenhuma key encontrada com os filtros aplicados!', 'warning');
-                return;
-            }
-            
-            exportKeys(format, keys);
-        }
-        
-        function exportKeys(format, keysList) {
-            if (format === 'json') {
-                const dataStr = JSON.stringify(keysList, null, 2);
-                downloadFile('keys.json', 'application/json', dataStr);
-            } else if (format === 'csv') {
-                let csv = 'Codigo,Nome,Tipo,Status,Criada,Primeira_Utilizacao,Expira\n';
-                
-                keysList.forEach(key => {
-                    const now = new Date();
-                    let status = 'Nao_utilizada';
-                    
-                    if (key.disabled) {
-                        status = 'Desativada';
-                    } else if (key.usedAt) {
-                        const expiresAt = new Date(key.expiresAt);
-                        status = now > expiresAt ? 'Expirada' : 'Ativa';
-                    }
-                    
-                    csv += `"${key.code}","${key.name || ''}","${key.type}","${status}","${formatDate(new Date(key.createdAt))}","${key.usedAt ? formatDate(new Date(key.usedAt)) : ''}","${key.expiresAt ? formatDate(new Date(key.expiresAt)) : ''}"\n`;
-                });
-                
-                downloadFile('keys.csv', 'text/csv', csv);
-            }
-        }
-        
-        function createBackup() {
-            const keys = getKeys();
-            const backupData = {
-                version: '1.0',
-                created_at: new Date().toISOString(),
-                keys: keys,
-                stats: {
-                    total_keys: keys.length
-                }
+            currentKeys.keys[keyIndex] = {
+                ...key,
+                activated: true,
+                activatedAt: now.toISOString(),
+                expiresAt: expirationDate.toISOString(),
+                status: 'active'
             };
-            
-            const backupStr = JSON.stringify(backupData, null, 2);
-            const filename = `keyauth_backup_${new Date().toISOString().split('T')[0]}.json`;
-            
-            downloadFile(filename, 'application/json', backupStr);
+
+            if (await saveToGithub(currentKeys)) {
+                showAlert('success', `🚀 Chave ativada com sucesso! Válida por ${key.duration} dias.`, 'activateResult');
+                document.getElementById('activateKey').value = '';
+            } else {
+                showAlert('error', '❌ Erro ao ativar chave!', 'activateResult');
+            }
         }
-        
-        function downloadFile(filename, mimeType, content) {
-            const blob = new Blob([content], { type: mimeType });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-        }
-        
-        // Event listeners
-        document.getElementById('passwordModal').addEventListener('click', function(e) {
-            if (e.target === this) closePasswordModal();
-        });
-        
-        document.getElementById('editModal').addEventListener('click', function(e) {
-            if (e.target === this) closeEditModal();
-        });
-        
-        document.getElementById('adminPassword').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') checkPassword();
-        });
-        
-        document.getElementById('keyToVerify').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') verifyKey();
-        });
-        
-        document.getElementById('keyToVerify').addEventListener('input', function(e) {
-            e.target.value = e.target.value.toUpperCase();
-        });
-        
-        document.getElementById('editKeyName').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') saveKeyEdit();
-        });
-        
-        // Adicionando estilo para animação de notificação
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from {
-                    transform: translateX(100%);
-                    opacity: 0;
+
+        function loadKeys() {
+            const container = document.getElementById('keysContainer');
+            if (!currentKeys.keys || currentKeys.keys.length === 0) {
+                container.innerHTML = '<p style="color: rgba(255,255,255,0.6);">Nenhuma chave encontrada.</p>';
+                return;
+            }
+
+            let html = '';
+            currentKeys.keys.forEach((key, index) => {
+                const now = new Date();
+                let status = key.status;
+                
+                if (key.activated && new Date(key.expiresAt) < now) {
+                    status = 'expired';
+                    key.status = 'expired';
                 }
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
+
+                const statusClass = status === 'active' ? 'active' : 
+                                 status === 'expired' ? 'expired' : 'inactive';
+
+                html += `
+                    <div class="key-item">
+                        <h4>🔑 ${key.key}</h4>
+                        <p>Criada: ${new Date(key.created).toLocaleString('pt-BR')}</p>
+                        <p>Duração: ${key.duration} dias</p>
+                        ${key.activated ? `
+                            <p>Ativada: ${new Date(key.activatedAt).toLocaleString('pt-BR')}</p>
+                            <p>Expira: ${new Date(key.expiresAt).toLocaleString('pt-BR')}</p>
+                        ` : '<p>Status: Não ativada</p>'}
+                        <span class="status ${statusClass}">${status.toUpperCase()}</span>
+                        <button onclick="toggleKey(${index})" style="margin-left: 10px; padding: 5px 15px; font-size: 12px;">
+                            ${status === 'active' ? '⏸️ Desativar' : status === 'inactive' ? '▶️ Reativar' : '🗑️ Remover'}
+                        </button>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        async function toggleKey(index) {
+            const key = currentKeys.keys[index];
+            
+            if (key.status === 'expired') {
+                // Remover chave expirada
+                currentKeys.keys.splice(index, 1);
+            } else if (key.status === 'active') {
+                // Desativar chave
+                key.status = 'inactive';
+            } else {
+                // Reativar chave
+                key.status = 'active';
+            }
+
+            if (await saveToGithub(currentKeys)) {
+                showAlert('success', '✅ Chave atualizada!');
+                loadKeys();
+            } else {
+                showAlert('error', '❌ Erro ao atualizar chave!');
+            }
+        }
+
+        function showAlert(type, message, containerId = null) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert ${type}`;
+            alertDiv.textContent = message;
+
+            const container = containerId ? document.getElementById(containerId) : 
+                             document.querySelector('.tab-content.active');
+            
+            // Remove alertas antigos
+            container.querySelectorAll('.alert').forEach(alert => alert.remove());
+            
+            container.appendChild(alertDiv);
+
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+        }
+
+        // Verificar chaves expiradas periodicamente
+        setInterval(() => {
+            if (currentKeys.keys) {
+                let hasChanges = false;
+                const now = new Date();
+                
+                currentKeys.keys.forEach(key => {
+                    if (key.activated && key.status === 'active' && new Date(key.expiresAt) < now) {
+                        key.status = 'expired';
+                        hasChanges = true;
+                    }
+                });
+
+                if (hasChanges && isAuthenticated) {
+                    saveToGithub(currentKeys);
+                    loadKeys();
                 }
             }
-        `;
-        document.head.appendChild(style);
-        
-        // Inicialização
-        console.log('🎉 GhostDev KeyAuth Pro carregado com sucesso!');
+        }, 60000); // Verifica a cada minuto
+
+        // API Endpoints simulados para demonstração
+        window.addEventListener('message', function(event) {
+            if (event.data.type === 'api_request') {
+                handleApiRequest(event.data);
+            }
+        });
+
+        function handleApiRequest(request) {
+            switch (request.endpoint) {
+                case 'verify':
+                    const key = currentKeys.keys.find(k => k.key === request.key);
+                    if (key && key.status === 'active' && new Date(key.expiresAt) > new Date()) {
+                        return { valid: true, expires: key.expiresAt };
+                    }
+                    return { valid: false };
+                    
+                case 'activate':
+                    // Implementar lógica de ativação via API
+                    break;
+            }
+        }
+
+        // Inicializar
+        checkGithubConnection();
     </script>
 </body>
 </html>
